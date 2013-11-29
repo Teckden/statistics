@@ -1,7 +1,9 @@
 require 'spec_helper'
 
 describe Trader do
-  it "has a valid factory" do
-    FactoryGirl.create(:trader).should be_valid
+  context 'when valid' do
+    it "has a valid factory" do
+      FactoryGirl.build(:trader).should be_valid
+    end
   end
 end
