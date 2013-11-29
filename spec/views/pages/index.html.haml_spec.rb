@@ -1,5 +1,9 @@
 require 'spec_helper'
 
 describe "pages/index.html.haml" do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context 'when rendering page' do
+    it 'should have text' do
+      render template: "pages/index.html.haml"
+    end
+  end
 end

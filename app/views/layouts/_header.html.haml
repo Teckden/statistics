@@ -1,3 +1,8 @@
 %nav.top-bar{data: 'topbar'}
   %h2 Traders statistics
+  .login-out-block
+    - if !user_signed_in?
+      = link_to 'Log In', new_user_session_path, class: 'button'
+    - else
+      = link_to 'Log Out', destroy_user_session_path, method: :delete, class: 'button'
 
