@@ -20,8 +20,10 @@
   %body
 
     = render 'layouts/header'
-    - if notice
-      %div= notice
-      %div= alert
-    = yield
-    = javascript_include_tag "application"
+    
+    #content
+      - if notice
+        %div= notice
+        %div= alert
+      = yield
+      = javascript_include_tag "application"
