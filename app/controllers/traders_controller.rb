@@ -1,12 +1,13 @@
 # coding: utf-8
 class TradersController < ApplicationController
 
+  before_filter :find_trader, only: [:show, :edit, :update, :destroy]
+
   def index
     @traders = Trader.all
   end
 
   def show
-    @trader = Trader.find(params[:id])
   end
 
   def new
@@ -24,12 +25,9 @@ class TradersController < ApplicationController
   end
 
   def edit
-    @trader = Trader.find(params[:id])
   end
 
   def update
-    @trader = Trader.find(params[:id])
-
     if @trader.update(permitted_params)
       redirect_to @trader, notice: 'Данные трейдера успешно обновлены'
     else
@@ -38,8 +36,6 @@ class TradersController < ApplicationController
   end
 
   def destroy
-    @trader = Trader.find(params[:id])
-
     if @trader.destroy
       redirect_to traders_path, notice: 'Трейдер успешно удален'
     else
@@ -48,6 +44,10 @@ class TradersController < ApplicationController
   end
 
 private
+  def find_trader
+    (@trader = Trader.find_by_id(params[:id])) ? (return @trader) : (redirect_to traders_path, alert: 'Трейдер отсутствует')
+  end
+
   def permitted_params
     params.require(:trader).permit(:pamm_name, :pamm_url, :pamm_broker, :pamm_num)
   end
